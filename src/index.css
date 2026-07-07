@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --animate-*: initial; 
+}
+@variant dark (&:where(.dark, .dark *));
