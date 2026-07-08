@@ -1,7 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Link, useNavigate } from '@tanstack/react-router'
 import { useEffect, useState, type ReactNode } from 'react'
-import { Home, Table2, Layers, FileText, Sun, Bell, Grid, Moon, Menu, X } from 'lucide-react'
+import { Home, Table2, Layers, FileText, Sun, Bell, Grid, Moon, Menu, X, MessageSquare } from 'lucide-react'
+import { ChatWindow } from '../../../features/chat/components/ChatWindow' // 🔥 Проверь и поправь путь к компоненту чата!
 
 interface MainLayoutProps {
   children: ReactNode
@@ -10,6 +11,7 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   const navigate = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isChatOpen, setIsChatOpen] = useState(false) 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
@@ -81,7 +83,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   )
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col font-sans transition-colors duration-200 relative">
       
       <header className="bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 sticky top-0 z-40 h-16 px-4 sm:px-8 flex items-center transition-colors duration-200">
         
@@ -139,9 +141,36 @@ export function MainLayout({ children }: MainLayoutProps) {
         </div>
       )}
 
-      <main className="flex-1 py-8 px-4 sm:px-8 max-w-full w-full mx-auto min-w-0">
+      <main className="flex-1 py-5 px-4 sm:px-8 max-w-full w-full mx-auto min-w-0">
         {children}
       </main>
+
+      <div className="fixed bottom-2 right-2 sm:bottom-2 sm:right-3 z-50 flex flex-col items-end gap-4 max-w-[calc(100vw-32px)]">
+        
+        {isChatOpen && (
+          <div className="w-full sm:w-[360px] md:w-[400px] animate-fade-in drop-shadow-2xl">
+            <ChatWindow />
+          </div>
+        )}
+
+        <button
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 ${
+            isChatOpen 
+              ? 'bg-rose-500 hover:bg-rose-600 rotate-90' 
+              : 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/20'
+          }`}
+          title={isChatOpen ? "Close Live Chat" : "Open Live Chat"}
+        >
+          {isChatOpen ? (
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
+          ) : (
+            <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+          )}
+        </button>
+
+      </div>
+
     </div>
   ) 
 }

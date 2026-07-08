@@ -61,9 +61,7 @@ function DashboardComponent() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full">
-
         <div className="lg:col-span-7 flex flex-col space-y-6 w-full">
-          
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 shrink-0">
             <div className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 p-4 rounded-xl flex items-center gap-3 shadow-2xs">
               <div className="w-9 h-9 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-500 flex items-center justify-center shrink-0">
@@ -214,13 +212,17 @@ function DashboardComponent() {
 
               <div className="w-full h-16 flex items-center justify-center my-1">
                 <ResponsiveContainer width="60%" height="100%">
-                  <BarChart data={stats.barChartData} barSize={3} barGap={0}>
-                    <Bar dataKey="completed" stackId="a" fill="#3b82f6" />
+                  <BarChart
+                    data={stats.barChartData}
+                    barSize={3}
+                    margin={{ top: 5, bottom: 5 }}
+                  >
                     <Bar
-                      dataKey="awaiting"
-                      stackId="a"
-                      fill="#e0e8ff"
+                      dataKey="completed"
+                      fill="#3b82f6"
                       radius={[1.5, 1.5, 0, 0]}
+
+                      background={{ fill: "#e0e8ff", radius: 1.5 }}
                     />
                   </BarChart>
                 </ResponsiveContainer>

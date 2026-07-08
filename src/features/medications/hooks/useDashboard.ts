@@ -19,7 +19,6 @@ export function useDashboard() {
     queryFn: fetchMedicationsApi,
   });
 
- // Внутри src/features/medications/hooks/useDashboard.ts
 const stats = useMemo(() => {
   if (!medications) return null;
 

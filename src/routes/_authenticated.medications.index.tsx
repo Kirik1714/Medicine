@@ -103,7 +103,9 @@ function MedicationsComponent() {
         </table>
       </div>
 
-      <div className="pt-5 pb-5 flex flex-col sm:flex-row gap-3 items-center justify-between text-xs text-slate-400 dark:text-slate-500">
+     <div className="pt-5 pb-5 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-xs text-slate-400 dark:text-slate-500">
+        
+        {/* Левая группа: Текст счетчика + бейдж фильтрации */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
           <span>
             1 to {displayedMedications.length} items of {filteredMedications.length}
@@ -115,15 +117,19 @@ function MedicationsComponent() {
           )}
         </div>
 
+        {/* Кнопка "View all", которая теперь стоит рядышком через gap */}
         {filteredMedications.length > 9 && (
           <button
             onClick={() => setIsAllVisible(!isAllVisible)}
-            className="text-blue-600 dark:text-blue-400 hover:underline font-semibold flex items-center gap-1 cursor-pointer py-1 px-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition"
+            className="text-blue-600 dark:text-blue-400 hover:underline font-semibold flex items-center gap-1 cursor-pointer py-1 px-2.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition duration-150 shrink-0"
           >
             {isAllVisible ? "Show less" : "View all"}
+            <span className="font-mono text-[10px]">&gt;</span>
           </button>
         )}
+
       </div>
+
     </div>
   );
 }
