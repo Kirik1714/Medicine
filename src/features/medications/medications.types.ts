@@ -36,6 +36,7 @@ export interface MedicationDetails extends BaseMedication {
   city: string;
   timeRange: string;
   tags: string[];
+  logs: TestLog[];
 }
 
 
