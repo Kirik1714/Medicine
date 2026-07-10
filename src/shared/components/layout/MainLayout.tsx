@@ -2,7 +2,7 @@
 import { Link, useNavigate } from '@tanstack/react-router'
 import { useEffect, useState, type ReactNode } from 'react'
 import { Home, Table2, Layers, FileText, Sun, Bell, Grid, Moon, Menu, X, MessageSquare } from 'lucide-react'
-import { ChatWindow } from '../../../features/chat/components/ChatWindow' // 🔥 Проверь и поправь путь к компоненту чата!
+import { ChatWindow } from '../../../features/chat/components/ChatWindow' 
 
 interface MainLayoutProps {
   children: ReactNode

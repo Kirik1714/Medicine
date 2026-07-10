@@ -1,4 +1,3 @@
-// src/features/medications/hooks/useMedications.ts
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMedicationsApi } from "../medications.api";
@@ -10,7 +9,6 @@ export function useMedications() {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
-  // Запрос данных
   const { data: medications, isLoading, error } = useQuery({
     queryKey: ["medications"],
     queryFn: fetchMedicationsApi,
@@ -42,7 +40,6 @@ export function useMedications() {
     });
   }, [medications, searchQuery, successFilter]);
 
-  // Ограничение количества строк
   const displayedMedications = isAllVisible
     ? filteredMedications
     : filteredMedications.slice(0, 9);

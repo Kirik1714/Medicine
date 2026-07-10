@@ -1,4 +1,3 @@
-// src/features/medications/hooks/useDashboard.ts
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMedicationsApi } from '../medications.api';

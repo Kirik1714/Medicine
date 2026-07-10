@@ -59,7 +59,6 @@ export function useChatWebSocket(url: string = 'wss://ws.ifelse.io') {
 
     setMessages((prev) => [...prev, userMessage]);
 
-    // Отправляем сырую строку на сервер
     socketRef.current.send(text);
   }, []);
 

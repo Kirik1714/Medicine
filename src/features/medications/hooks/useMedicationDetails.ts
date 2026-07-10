@@ -1,4 +1,3 @@
-// src/features/medications/hooks/useMedicationDetails.ts
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchMedicationByIdApi, updateLocalMedicationApi } from "../medications.api";
