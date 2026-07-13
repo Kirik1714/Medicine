@@ -1,6 +1,6 @@
 // src/features/medications/components/NotFoundComponent.tsx
-import { Link } from '@tanstack/react-router';
-import { HelpCircle, ArrowLeft } from 'lucide-react';
+import { Link } from "@tanstack/react-router";
+import { HelpCircle, ArrowLeft } from "lucide-react";
 
 export function NotFoundComponent() {
   return (
@@ -12,10 +12,11 @@ export function NotFoundComponent() {
         404 - Page Not Found
       </h1>
       <p className="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-sm leading-relaxed">
-        The destination address does not exist or has been moved within the pharmacy core registry.
+        The destination address does not exist or has been moved within the
+        pharmacy core registry.
       </p>
-      <Link 
-        to="/" 
+      <Link
+        to="/"
         className="mt-6 inline-flex items-center gap-2 py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition text-xs shadow-xs cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />

@@ -1,75 +1,132 @@
-# React + TypeScript + Vite
+# Pharmacy App 🏥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based dashboard for monitoring clinical trials, laboratory testing, and pharmaceutical production. The application provides data visualization, interactive charts, and map integration to help track testing progress and approval status.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **TanStack Query**
+- **TanStack Router**
+- **Tailwind CSS**
+- **Recharts**
+- **React Leaflet / Leaflet**
+- **Lucide React**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Dashboard with key performance indicators (KPIs)
+- Daily testing statistics
+- Weekly testing progress visualization
+- Drug approval analytics
+- Testing process overview
+- Success rate monitoring
+- Interactive map of laboratories and research centers
+- Responsive design
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Dashboard Overview
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Total Tests
+Displays planned, executed, and completed tests for each day to compare actual progress with the testing plan.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Total Tested Drugs
+Shows the total number of tested drug samples and weekly testing progress.
 
+### Drug Approval Rates
+Tracks approved drug formulations compared with the total number of manufactured formulations over the last seven days.
+
+### Testing Process
+Visualizes how laboratory work is distributed across the four research stages:
+- Preclinical
+- Clinical
+- Regulatory
+- Phase 4 Approval
+
+### Success Rate
+Displays the percentage of approved formulations versus those requiring retesting.
+
+---
+
+## 📁 Project Architecture & Structure
+
+The project follows a modular **Feature-Driven Architecture**, making the codebase easy to maintain and extend.
+
+### `src/features/`
+Contains feature modules such as authentication, chat, and medication management. Each feature includes its own components, hooks, API logic, and utilities.
+
+### `src/routes/`
+Defines the application's routes using **TanStack Router**, including both public and protected pages.
+
+### `src/shared/`
+Stores reusable components, API configuration, layouts, and shared utilities used across the application.
+
+### `src/routeTree.gen.ts`
+Automatically generated routing configuration created by TanStack Router.
+
+---
+
+## Getting Started
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd pharmacy-app
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Run the application locally:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+```
+
+The app will be available at:
 
 ```
+http://localhost:5173
+```
+
+### Other Commands
+
+```bash
+npm run build    # Create production build
+npm run preview  # Preview production build
+npm run lint     # Check code quality
+```
+
+## Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| React | User Interface |
+| TypeScript | Type Safety |
+| Vite | Build Tool |
+| Tailwind CSS | Styling |
+| TanStack Query | Server State Management |
+| TanStack Router | Routing |
+| Recharts | Charts and Analytics |
+| React Leaflet | Interactive Maps |
+| Lucide React | Icons |
+
+---
+
+## Future Improvements
+
+- Authentication
+- Backend API integration
+- Real-time dashboard updates
+- Export reports
+- Advanced filtering and search
+- Dark mode support
+
+---

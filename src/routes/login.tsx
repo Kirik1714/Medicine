@@ -1,41 +1,25 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { loginUserApi } from "../features/auth/auth.api";
+import { createFileRoute, Link } from "@tanstack/react-router";
+
 import { Eye, EyeOff } from "lucide-react";
+import { useLogin } from "../features/auth/hooks/useLogin";
 
 export const Route = createFileRoute("/login")({
   component: LoginComponent,
 });
 
 function LoginComponent() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword,setShowPassword] = useState(false)
-
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: loginUserApi,
-    onSuccess: (data) => {
-      localStorage.setItem("auth_token", data.token);
-
-      const userProfile = {
-        name: `${data.firstName} ${data.lastName}`,
-        avatar: data.image,
-      };
-      localStorage.setItem("user_profile", JSON.stringify(userProfile));
-
-      navigate({ to: "/" });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!username || !password) return;
-
-    mutate({ username, password });
-  };
+ const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    showPassword,
+    setShowPassword,
+    isPending,
+    error,
+    handleSubmit,
+  } = useLogin();
 
  return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-900 p-4 transition-colors duration-200">
@@ -119,7 +103,7 @@ function LoginComponent() {
         </div>
         
         <div className="mt-6 text-center text-xs text-slate-400 dark:text-slate-500">
-          <p>Подсказка для теста:</p>
+          <p>Hint for test user:</p>
           <p className="font-mono mt-1 text-slate-500 dark:text-slate-400">
             Логин: <span className="text-blue-600 dark:text-blue-400">emilys</span> | Пароль:{" "}
             <span className="text-blue-600 dark:text-blue-400">emilyspass</span>

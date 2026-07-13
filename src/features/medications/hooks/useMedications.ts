@@ -2,12 +2,30 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMedicationsApi } from "../medications.api";
 
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
 export function useMedications() {
   const [isAllVisible, setIsAllVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [successFilter, setSuccessFilter] = useState<"all" | "success" | "failed">("all");
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   const { data: medications, isLoading, error } = useQuery({
     queryKey: ["medications"],
@@ -28,7 +46,8 @@ export function useMedications() {
     if (!medications) return [];
 
     return medications.filter((med) => {
-      const matchesSearch = med.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = med.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
+      
       const matchesSuccess =
         successFilter === "all"
           ? true
@@ -38,7 +57,7 @@ export function useMedications() {
 
       return matchesSearch && matchesSuccess;
     });
-  }, [medications, searchQuery, successFilter]);
+  }, [medications, debouncedSearchQuery, successFilter]);
 
   const displayedMedications = isAllVisible
     ? filteredMedications
@@ -50,7 +69,7 @@ export function useMedications() {
     filteredMedications,
     isLoading,
     error,
-    searchQuery,
+    searchQuery, 
     setSearchQuery,
     successFilter,
     setSuccessFilter,

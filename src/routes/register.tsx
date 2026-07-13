@@ -1,47 +1,32 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useMutation } from "@tanstack/react-query";
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { registerUserApi } from "../features/auth/auth.api";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Eye, EyeOff } from "lucide-react";
+import { useRegister } from "../features/auth/hooks/useRegister";
 
 export const Route = createFileRoute("/register")({
   component: RegisterComponent,
 });
 
 function RegisterComponent() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [validationError, setValidationError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: registerUserApi,
-    onSuccess: () => {
-      alert("Registration finished successfully! Now sign in system.");
-      navigate({ to: "/login" });
-    },
-  });
-
-  const handleSubmit = (e: React.SubmitEvent) => {
-    e.preventDefault();
-    setValidationError(null);
-
-    if (!username || !email || !password || !confirmPassword) return;
-
-    if (password !== confirmPassword) {
-      setValidationError("Password doesn't match!");
-      return;
-    }
-
-    mutate({ username, email, password });
-  };
-
-return (
+  const {
+    username,
+    setUsername,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    validationError,
+    showPassword,
+    setShowPassword,
+    showConfirmPassword,
+    setShowConfirmPassword,
+    isPending,
+    error,
+    handleSubmit,
+  } = useRegister();
+  return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-900 p-4 transition-colors duration-200">
       <div className="w-full max-w-md p-8 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700/80 transition-colors duration-200">
         <h2 className="text-3xl font-bold text-center text-slate-800 dark:text-white">
@@ -54,7 +39,8 @@ return (
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           {(validationError || error) && (
             <div className="p-3 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 text-sm rounded-lg border border-red-100 dark:border-red-900/50 text-center font-medium">
-              {validationError || "Registration failed. Please try again later."}
+              {validationError ||
+                "Registration failed. Please try again later."}
             </div>
           )}
 
@@ -86,7 +72,7 @@ return (
             />
           </div>
 
-         <div className="space-y-1">
+          <div className="space-y-1">
             <label className="text-sm font-medium text-slate-600 dark:text-slate-400">
               Password
             </label>
@@ -106,7 +92,11 @@ return (
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition cursor-pointer disabled:cursor-not-allowed"
                 tabIndex={-1}
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>
@@ -131,7 +121,11 @@ return (
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition cursor-pointer disabled:cursor-not-allowed"
                 tabIndex={-1}
               >
-                {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showConfirmPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>

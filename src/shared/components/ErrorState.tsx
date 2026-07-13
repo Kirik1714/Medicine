@@ -6,9 +6,9 @@ interface ErrorStateProps {
   message?: string;
 }
 
-export function ErrorState({ 
-  title = "Server communication error", 
-  message = "Failed to fetch data from the remote server. Please try again later." 
+export function ErrorState({
+  title = "Server communication error",
+  message = "Failed to fetch data from the remote server. Please try again later.",
 }: ErrorStateProps) {
   return (
     <div className="text-center py-16 bg-red-50/60 dark:bg-red-950/20 rounded-2xl border border-red-100 dark:border-red-900/30 p-6 max-w-md mx-auto mt-10 animate-fade-in">
